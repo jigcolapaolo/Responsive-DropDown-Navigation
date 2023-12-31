@@ -1,0 +1,353 @@
+/* * { outline: 1px red solid !important; visibility: visible !important } */
+@font-face{
+	font-family:Roboto;
+    src:url(../fonts/Roboto-Regular.ttf);
+}
+@font-face{
+	font-family:RobotoMedium;
+    src:url(../fonts/Roboto-Medium.ttf);
+}
+@font-face{
+	font-family:RobotoBold;
+    src:url(../fonts/Roboto-Bold.ttf);
+}
+
+:root{
+    --menu-count:5;         /*Cantidad de li, en el menu, si agrego otro mas, debo poner 6*/
+}
+
+body{
+    background-color:#111;
+}
+
+.mobile-menu-btn{
+    display:none;
+}
+
+
+/*-----------------------------HEADER----------------------------------*/
+
+.header-main{
+    width:100%;
+    padding:0 60px;      /*60px de izquierda y derecha*/
+    height:60px;         /*Para que no sea plano*/
+    background-color:#ffffff;
+    display:flex;
+    justify-content:space-between;    /*Estira a los elementos a los extremos, dejando espacio*/
+    position:fixed;
+    top:0;
+    z-index:100;
+}
+.header-main nav{
+    display:flex;        /*Se pone al lado de los elementos*/
+}
+.header-main .logo{
+    height:60px;
+    width:fit-content;
+    align-self:center;
+    cursor:pointer;
+}
+.header-main .logo img{
+    height:100%;         /*Se estira a la altura maxima de su contenedor*/
+}
+.header-main ul{
+    height:100%;        /*Se estira a la altura maxima de su contenedor*/
+    padding-left:40px;
+    list-style:none;
+    display:flex;
+    align-self:center;       /*Se alinea verticalmente al centro*/
+}
+.header-main ul li{
+    position:relative;     /*Acomoda el dropdown list, debajo de gallery*/
+}
+.header-main ul li a{
+    display:block;
+    padding:0 10px;           /*Separa mejor los elementos de la lista*/
+    height:100%;              /*Los elementos del primer ul ocupan el 100% de la altura del header*/
+    line-height:60px;         /*Centra el texto - Debe ser igual al height del contenedor (header-main)*/
+    font-size:1rem;
+    font-family:RobotoMedium;
+    color:#000000;
+    background-color:#fff;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all ease-in-out 100ms;
+}
+.header-main ul li a:hover{
+    background-color:#2a2a2a;
+    color:#fff;
+}
+
+/*--------------Arreglar el DropDown de Gallery-----------*/
+
+.header-main ul li ul{
+    visibility:hidden;
+    opacity:0;
+    display:none;               /*Lo quita completamente de la pagina*/
+    position:absolute;          
+    left:-40px;                 /*Se mueve a la izquierda un poco para que quede alineado al aparecer luego*/
+    transition:all ease-in-out 100ms;
+}
+.header-main ul li ul li a{
+    white-space:nowrap;        /* El texto debe estar a continuacion, no en otra linea */
+}
+ul li:hover>ul{                  /*Si pongo el cursor sobre un elemento li que este en un ul, entonces cambiare (>) el ul*/
+    visibility:visible;
+    opacity:1;                  /*Cambio todo lo de .header-main ul li ul */
+    display:block;
+}
+
+
+/*--------------DropDown END-----------*/
+
+
+
+/*--------------HEADER SOCIAL MEDIA-----------*/
+
+.header-main .sm{
+    align-self:center;                  /*Se alinea a la derecha de nav con flex y al centro de header con align*/
+    display:flex;
+}
+.header-main form{
+    height:40px;
+    padding-right:5px;                 /*Distancia con los iconos de social media*/
+    display:flex;                      /*Poner al lado del elemento detras suyo*/
+    border:1px solid #aeaeae;
+    border-radius:20px 100px 100px 20px;
+    width:fit-content;
+    align-self:center;                  /*Alinea verticalmente al centro del header*/
+}
+.header-main form input{
+    height:100%;
+    width:300px;                        /*Para achicar el input*/
+    padding:0 10px 0 20px;
+    border-radius:5px;
+    font-size:1rem;
+    font-family:Roboto;
+}
+.header-main form input:focus{
+    border:1px solid #111;
+}
+.header-main form button{
+    width:fit-content;
+    padding:0 5px 0 10px;
+}
+.header-main form button img{
+    height:24px;
+    padding-top:15%;              /*Acomoda y achica la img de la lupa */
+    cursor:pointer;
+}
+
+
+.header-main .sm-links{
+    height:60px;
+    width:fit-content;      
+    display:flex;
+    align-items:center;
+}
+.header-main .sm-links a{
+    display:block;
+    height:30px;
+    margin-left:10px;
+    cursor:pointer;
+    align-self:center;
+}
+.header-main .sm-links img{
+    height:100%;
+}
+
+
+
+/*---------------------------RESPONSIVE------------------------*/
+
+@media only screen and (max-width:600px){
+
+    .header-main{
+        display:none;
+    }
+    .mobile-menu-btn{
+        display:flex;
+        justify-content:center;
+        width:60px;
+        height:60px;
+        position:absolute;              /*Al declarar position puedo usar top y right*/
+        top:0;                          /*Lleva hasta arriba de todo y luego al extremo derecho*/
+        right:0;
+        z-index:200;                    /*Mayor que el header main para que aparezca sobre el siempre*/
+        background-color:#fff;
+    }
+    .mobile-menu-btn img{
+        height:80%;
+        align-self:center;
+    }
+
+    /*-----------Ajustar el header main-----------*/
+
+    .header-main{
+        height:100vh;                  /*Para que  ocupe toda la pantalla*/
+        flex-wrap:wrap;                  /*Ya esta declarado el display:flex; antes*/
+        flex-direction:column;          /*Para que se muestren los elementos hacia abajo, no en linea (Movil) junto con el wrap anterior*/
+        padding:0;                    /*Le quito el padding ya declarado antes*/
+        justify-content:flex-start;    /*Para que se muestre todo al inicio y no se centre*/
+
+    }
+
+    .header-main nav{
+        width:100%;
+        height:80vh;                /*Para que se ajuste mejor al movil con width*/
+        flex-wrap:wrap;
+        flex-direction:column;      /*Se repite el wrap y el direction anterior*/
+        align-content:stretch;
+    }
+
+    .header-main .logo{
+        height:30%;
+        padding:0;
+        margin:0;
+        display:flex;
+        align-items:center;         /*Vertical*/
+    }
+    .header-main .logo img{
+        height:60%;
+        align-self:center;         /*Horizontalmente*/
+    }
+
+    .header-main ul{
+        height:70%;            /*70% para que sume 100% con el height:30% del header-main .logo*/
+        width:100%;            /*100% para que ocupe todo el espacio de derecha a izquierda*/
+        padding:0;
+        margin:0;             /*Resetear el padding y el margin*/
+        flex-wrap:wrap;
+        flex-direction:column;         /*Alinear todo hacia abajo*/
+        align-content:space-between;    /*Separar los elementos*/
+    }
+    .header-main ul li{
+        width:100%;
+        height:calc(100% / var(--menu-count));      /*Divide 100% por la cantidad de elementos del menu para que se ajusten de igual manera en el contenedor */
+        padding:0;
+        margin:0;
+        /*Dar a los elementos un borde arriba*/
+        border:1px solid #ddd;
+        /*display flex, wrap y column para que el dropdown vaya debajo de gallery y justify content
+        ya que usamos column para centrar el texto*/
+        display:flex;
+        flex-wrap:nowrap;
+        flex-direction:column;
+        justify-content:center;
+        transition:all ease-in-out 100ms;
+    }
+
+    .header-main ul li:nth-last-child(1){
+        border:1px solid #ddd;
+    }
+
+    .header-main ul li a{
+        width:100%;
+        height:fit-content;
+        padding:0;
+        margin:0;
+        text-align:center;          /*Alinea el texto al centro de la pagina despues de haber reseteado el margin y padding con el fit content*/
+        font-size:2.5rem;
+    }
+
+    /*Revierte 
+        .header-main ul li a:hover{
+            background-color:#2a2a2a;
+            color:#fff;
+        }*/
+    .header-main ul li a:hover{
+        background-color:transparent;
+        color:#111;
+    }
+
+    /*Agregar scrolling al dropdown*/
+
+    .header-main nav{
+        overflow-y: scroll;          /*Para poder hacer scroll hacia abajo*/
+        overflow-x: hidden;          /*hidden para que no se pueda hacer a la izquierda o derecha*/
+    }
+
+
+    /*Para que el dropdown solo se cargue cuando clickeo o toco sobre gallery*/
+    .header-main ul li ul{
+        display:none;           /*Si no lo pongo en none, la lista del dropdown estara cargada aunque no se muestre, y si hay muchos elementos, la pagina tendra espacios en blanco abajo aunque no este abierto el dropdown*/   
+
+        flex-wrap:nowrap;
+        flex-direction:column;       /*Hacia abajo*/
+        position:absolute;           /*Puede declararse o no ya que ya se habia declarado antes, para que este en el lugar donde debe estar y no salga de la pantalla*/
+        top:0;
+        left:0;                      /*Para quitar el left:-40px; declarado antes*/
+        z-index:2000;                /*Debe ser el numero mas grande*/
+    }
+
+    /*Para que el dropdown se desplace hacia abajo en bloques*/
+    .header-main ul li ul li{
+        height:fit-content;
+        display:block;
+        background-color:#111;
+    }
+
+    .header-main ul li ul li a{
+        background-color:#111;
+        color:#fff;
+    }
+
+    .header-main ul li ul li a:hover{
+        background-color:#111;
+        color:#fff;
+    }
+
+
+    .header-main ul li:focus>ul,
+    .header-main ul li:hover>ul{
+        display:flex;                 /*Quita el display none al abrirl el dropdown*/
+        /*Visibility y opacity para que funcione en firefox*/
+        visibility:visible;
+        opacity:1;
+    }
+
+    /*----------DROPDOWN STOP-----------*/
+
+
+    .header-main .sm{
+        width:100%;
+        height:20vh;              /*Porque el header-main nav tiene height:80vh;*/
+        margin:0;
+        padding:0;
+        flex-wrap:wrap;
+        flex-direction:column;
+
+    }
+    .header-main form{
+        padding-right:0;
+        width:90%;                 /*Para que no vaya hasta el extremo de la pagina*/
+        height:40%;
+    }
+    .header-main form input{
+        width:100%;
+        height:100%;                 /*Ocupara todo el espacio de su contenedor form*/
+        padding:0 10px 0 20px;
+        font-size:1.6rem;
+    }
+    .header-main form button{
+        padding:0 5%;
+    }
+    .header-main form button img{
+        height:5vh;
+        padding-top:15%;
+    }
+
+    .header-main .sm-links{
+        height:50%;
+        width:100%;
+        margin:0;
+        padding:0;
+        justify-content:center;
+    }
+
+    .header-main .sm-links a{
+        height:60%;
+        margin:0 2%;
+        padding:0;
+    }
+}
